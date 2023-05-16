@@ -1,0 +1,37 @@
+name: Deploying hardhat contract
+'on':
+  pull_request:
+      branches:
+      - main
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Checkout the repository
+    - name: Checkout
+      uses: actions/checkout@v3
+      
+     # Install dependencies
+    - name: Install Dependencies
+      run: yarn install
+      continue-on-error: false
+
+    
+    - name: Get version
+      uses: amine7777/hardhat-action@v1
+      with:
+        command: --version
+        
+    # Merge to main branch
+    - name: Merge to Main
+      if: success() && github.event_name == 'push' && github.ref == 'refs/heads/main' # Only merge on successful push to main branch
+      run: git merge origin/main --no-edit
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        continue-on-error: false
+        
+
