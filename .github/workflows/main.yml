@@ -21,8 +21,17 @@ jobs:
       continue-on-error: false
 
     
-    - name: Get version
-      uses: amine7777/hardhat-action@v1
+#     - name: Get version
+#       uses: amine7777/hardhat-action@v1
+
+    - run: yarn --ignore-scripts
+      shell: bash
+    - name: Create local node and deploy
+      run: |
+        yarn hardhat node &
+        yarn hardhat run scripts/deploy.ts --network localhost
+    - name: Run Tests
+      run: yarn hardhat test
 
         
     # Merge to main branch
