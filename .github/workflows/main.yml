@@ -23,8 +23,7 @@ jobs:
     
     - name: Get version
       uses: amine7777/hardhat-action@v1
-      with:
-        command: --version
+
         
     # Merge to main branch
     - name: Merge to Main
