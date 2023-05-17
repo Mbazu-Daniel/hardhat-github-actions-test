@@ -19,10 +19,7 @@ jobs:
     - name: Install Dependencies
       run: yarn install
       continue-on-error: false
-
-    
-#     - name: Get version
-#       uses: amine7777/hardhat-action@v1
+  
 
     - run: yarn --ignore-scripts
       shell: bash
